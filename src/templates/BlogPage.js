@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => {
             flexDirection: 'column',
         },
         cardMedia: {
-            paddingTop: '56.25%', // 16:9
+            maxHeight:200,
         },
         cardContent: {
             flexGrow: 1,
@@ -49,7 +49,7 @@ export default function BlogPage(props) {
             blogTitle:edge.node.blogTitle,
             postTitle: edge.node.postTitle,
             postDescription: edge.node.postDescription.postDescription,
-            postImage: edge.node.postImage.fluid.src,
+            postImage: edge.node.postImage.fluid,
             postSlug: props.path+"/"+edge.node.postTitle.replace(/\s+/g, '-').toLowerCase(),
             key:index,
         };
@@ -117,7 +117,7 @@ query($blogTitle: String!){
                 postTitle
                 postImage{
                     fluid{
-                        src
+                        ...GatsbyContentfulFluid
 					}
                 }
                 postDescription{

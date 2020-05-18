@@ -4,9 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import BlogCard from '../components/BlogCard'
-import Footer from '../components/footer'
-import { useStaticQuery, graphql } from 'gatsby'
+import BlogCard from '../components/BlogCard';
+import Footer from '../components/footer';
+import { useStaticQuery, graphql } from 'gatsby';
+
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => {
             flexDirection: 'column',
         },
         cardMedia: {
-            paddingTop: '56.25%', // 16:9
+            height:200,
         },
         cardContent: {
             flexGrow: 1,
@@ -55,7 +56,7 @@ export default function Blog() {
                     }
                     blogImage{
                         fluid{
-                            src
+                            ...GatsbyContentfulFluid
                         }         
                     }
                 }
@@ -70,7 +71,7 @@ export default function Blog() {
             blogTitle: node.blogTitle,
             blogSlug: "/blog/" + node.blogTitle.replace(/\s+/g, '-').toLowerCase(),
             blogDescription: node.blogDescription.blogDescription,
-            blogImage: node.blogImage.fluid.src,
+            blogImage: node.blogImage.fluid,
             key:index,
         }
     });
