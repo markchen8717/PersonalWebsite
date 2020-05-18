@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import BlogCard from '../components/BlogCard'
 import Footer from '../components/footer'
-import { useStaticQuery, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -42,39 +42,19 @@ const useStyles = makeStyles((theme) => {
     };
 });
 
-export default function Blog() {
-    const classes = useStyles();
-    const staticQuery = useStaticQuery(graphql`
-    query{
-        allContentfulBlog{
-            edges{
-                node{
-                    blogTitle
-                    blogDescription{
-                        blogDescription
-                    }
-                    blogImage{
-                        fluid{
-                            src
-                        }         
-                    }
-                }
-            }
-        }
-    }
-    `)
-
-    const blogs = staticQuery.allContentfulBlog.edges.map((edge,index) => {
-        const node = edge.node
+export default function BlogPage(props) {
+    // console.log(props);
+    const posts = props.data.allContentfulBlogPost.edges.map((edge,index) => {
         return {
-            blogTitle: node.blogTitle,
-            blogSlug: "/blog/" + node.blogTitle.replace(/\s+/g, '-').toLowerCase(),
-            blogDescription: node.blogDescription.blogDescription,
-            blogImage: node.blogImage.fluid.src,
+            blogTitle:edge.node.blogTitle,
+            postTitle: edge.node.postTitle,
+            postDescription: edge.node.postDescription.postDescription,
+            postImage: edge.node.postImage.fluid.src,
+            postSlug: props.path+"/"+edge.node.postTitle.replace(/\s+/g, '-').toLowerCase(),
             key:index,
-        }
+        };
     });
-
+    const classes = useStyles();
     return (
         <React.Fragment>
             <CssBaseline />
@@ -83,11 +63,11 @@ export default function Blog() {
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                            My Blogs
+                            {props.pageContext.blogTitle}
                         </Typography>
-                        {/* <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            Page description
-                        </Typography> */}
+                        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                            {props.pageContext.blogDescription}
+                        </Typography>
                     </Container>
                 </div>
                 {/* End hero unit */}
@@ -105,21 +85,21 @@ export default function Blog() {
                         spacing={4}
                     >
                         {
-                            blogs.map((blog) => (
-                                <Grid item xs={12} sm={6} md={4} key={blog.key}
+                            posts.map((post) => (
+                                <Grid item xs={12} sm={6} md={4} key={post.key}
                                 // style={{ backgroundColor: 'purple' }}
                                 >
                                     <BlogCard
                                         cardMediaClass={classes.cardMedia}
-                                        image={blog.blogImage}
-                                        title={blog.blogTitle}
-                                        description={blog.blogDescription}
-                                        slug={blog.blogSlug}
+                                        image={post.postImage}
+                                        title={post.postTitle}
+                                        description={post.postDescription}
+                                        slug={post.postSlug}
                                     />
                                 </Grid>
-                                
                             ))
                         }
+
                     </Grid>
                 </Container>
             </main>
@@ -127,3 +107,24 @@ export default function Blog() {
         </React.Fragment>
     );
 };
+
+export const pageQuery = graphql`
+query($blogTitle: String!){
+    allContentfulBlogPost(filter: { blogTitle: { eq: $blogTitle } }){
+		edges{
+            node{
+                blogTitle
+                postTitle
+                postImage{
+                    fluid{
+                        src
+					}
+                }
+                postDescription{
+                    postDescription
+                }
+            }
+        }
+    }
+}
+`;
