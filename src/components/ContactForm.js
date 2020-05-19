@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 
 export default function ContactForm() {
     return (
-        <form 
+        <form
             name="contact"
             method="post"
             action="/thanks/"
@@ -16,8 +16,11 @@ export default function ContactForm() {
             data-netlify-honeypot="bot-field"
             autoComplete="off"
         >
-            <p style={{ visibility: "hidden" }}>
-                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+            <input type="hidden" name="form-name" value="contact" />
+            <p hidden>
+                <label>
+                    Don’t fill this out: <input name="bot-field" />
+                </label>
             </p>
             <Container
             // style={{ backgroundColor: "blue" }}
