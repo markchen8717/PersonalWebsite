@@ -6,6 +6,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             {new Date().getFullYear()}
+            {' Mark Chen.'}
         </Typography>
     );
 };

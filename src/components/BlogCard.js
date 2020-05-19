@@ -14,7 +14,6 @@ const useStyles = makeStyles({
 });
 export default function BlogCard(props) {
     const classes = useStyles();
-    console.log(props.image)
     return (
         <Link to={props.slug} style={{ textDecoration: "none" }}>
             <Card >

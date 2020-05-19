@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => {
             flexDirection: 'column',
         },
         cardMedia: {
-            height:200,
+            height: 200,
         },
         cardContent: {
             flexGrow: 1,
@@ -65,14 +65,14 @@ export default function Blog() {
     }
     `)
 
-    const blogs = staticQuery.allContentfulBlog.edges.map((edge,index) => {
+    const blogs = staticQuery.allContentfulBlog.edges.map((edge, index) => {
         const node = edge.node
         return {
             blogTitle: node.blogTitle,
             blogSlug: "/blog/" + node.blogTitle.replace(/\s+/g, '-').toLowerCase(),
             blogDescription: node.blogDescription.blogDescription,
             blogImage: node.blogImage.fluid,
-            key:index,
+            key: index,
         }
     });
 
@@ -94,8 +94,8 @@ export default function Blog() {
                 {/* End hero unit */}
                 <Container
                     className={classes.cardGrid}
-                // maxWidth="md" 
-                // style={{ backgroundColor: "green" }}
+                    // maxWidth="md" 
+                    // style={{ backgroundColor: "green" }}
                 >
                     <Grid
                         container
@@ -118,7 +118,6 @@ export default function Blog() {
                                         slug={blog.blogSlug}
                                     />
                                 </Grid>
-                                
                             ))
                         }
                     </Grid>

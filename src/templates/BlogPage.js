@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => {
             flexDirection: 'column',
         },
         cardMedia: {
-            maxHeight:200,
+            maxHeight: 200,
         },
         cardContent: {
             flexGrow: 1,
@@ -44,14 +44,14 @@ const useStyles = makeStyles((theme) => {
 
 export default function BlogPage(props) {
     // console.log(props);
-    const posts = props.data.allContentfulBlogPost.edges.map((edge,index) => {
+    const posts = props.data.allContentfulBlogPost.edges.map((edge, index) => {
         return {
-            blogTitle:edge.node.blogTitle,
+            blogTitle: edge.node.blogTitle,
             postTitle: edge.node.postTitle,
             postDescription: edge.node.postDescription.postDescription,
             postImage: edge.node.postImage.fluid,
-            postSlug: props.path+"/"+edge.node.postTitle.replace(/\s+/g, '-').toLowerCase(),
-            key:index,
+            postSlug: props.path + "/" + edge.node.postTitle.replace(/\s+/g, '-').toLowerCase(),
+            key: index,
         };
     });
     const classes = useStyles();
@@ -73,8 +73,8 @@ export default function BlogPage(props) {
                 {/* End hero unit */}
                 <Container
                     className={classes.cardGrid}
-                // maxWidth="md" 
-                // style={{ backgroundColor: "green" }}
+                    // maxWidth="md" 
+                    // style={{ backgroundColor: "green" }}
                 >
                     <Grid
                         container
@@ -99,7 +99,6 @@ export default function BlogPage(props) {
                                 </Grid>
                             ))
                         }
-
                     </Grid>
                 </Container>
             </main>

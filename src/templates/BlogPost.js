@@ -1,11 +1,12 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-// import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from '../components/footer'
 import { graphql } from 'gatsby'
+import ContactForm from '../components/ContactForm'
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -62,13 +63,22 @@ export default function BlogPost(props) {
                 {/* End hero unit */}
                 <Container
                     className={classes.cardGrid}
-                    maxWidth="md" 
-                    // style={{ backgroundColor: "green" }}
+                    maxWidth="md"
+                // style={{ backgroundColor: "green" }}
                 >
-                    <div dangerouslySetInnerHTML={{__html:props.data.contentfulBlogPost.postContent.childContentfulRichText.html}}/>
+                    <div dangerouslySetInnerHTML={{ __html: props.data.contentfulBlogPost.postContent.childContentfulRichText.html }} />
                 </Container>
             </main>
-            <Footer className={classes.footer} />
+            <Container >
+                <Grid container direction="column" spacing={6} >
+                    <Grid item >
+                        <ContactForm />
+                    </Grid>
+                    <Grid item >
+                        <Footer className={classes.footer} />
+                    </Grid>
+                </Grid>
+            </Container>
         </React.Fragment>
     );
 };
