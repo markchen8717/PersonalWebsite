@@ -8,75 +8,89 @@ import Typography from '@material-ui/core/Typography'
 
 export default function ContactForm() {
     return (
-        <form name="contact" method="POST" netlify-honeypot="bot-field" data-netlify="true" autoComplete="off">
-            <p style={{ visibility: "hidden" }}>
-                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-            </p>
-            <Container
-            // style={{ backgroundColor: "blue" }}
-            >
-                <Grid
-                    spacing={1}
-                    container direction="column" justify="center" alignItems="center"
-                // style={{ backgroundColor: "green" }}
-                >
-                    <Grid item >
-                        <Typography variant="h6" align="center" gutterBottom>
-                            Contact Me
-                        </Typography>
-                    </Grid>
-                    <Grid container item direction="row" justify="center" alignItems="center"
-                    // style={{ backgroundColor: "purple" }}
-                    >
-                        <Grid container item xs={12} sm={6}
-                        // style={{ backgroundColor: "red" }}
-                        >
-                            <TextField
-                                id="outlined-textarea"
-                                label="Name"
-                                variant="outlined"
-                                style={{ width: "100%" }}
-                                type="text"
-                                name="name"
-                            />
-                        </Grid>
-                        <Grid container item xs={12} sm={6}
-                        // style={{ backgroundColor: "orange" }}
-                        >
-                            <TextField
-                                id="outlined-textarea"
-                                label="Email"
-                                variant="outlined"
-                                type="text"
-                                name="email"
-                                style={{ width: "100%" }}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid container item justify="center" alignItems="center"
-                    // style={{ backgroundColor: "yellow" }}
-                    >
-                        <Grid container item xs={12}
-                        // style={{ backgroundColor: "green" }}
-                        >
-                            <TextField
-                                id="outlined-multiline-static"
-                                label="Message"
-                                multiline
-                                rows={5}
-                                variant="outlined"
-                                style={{ width: "100%" }}
-                                name="message"
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid >
-                        <Button variant="contained" color="primary" type="submit" >
-                            Send
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Container>
-        </form>
+        // <form name="contact" method="POST" netlify-honeypot="bot-field" data-netlify="true" autoComplete="off">
+        //     <p style={{ visibility: "hidden" }}>
+        //         <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+        //     </p>
+        //     <Container
+        //     // style={{ backgroundColor: "blue" }}
+        //     >
+        //         <Grid
+        //             spacing={1}
+        //             container direction="column" justify="center" alignItems="center"
+        //         // style={{ backgroundColor: "green" }}
+        //         >
+        //             <Grid item >
+        //                 <Typography variant="h6" align="center" gutterBottom>
+        //                     Contact Me
+        //                 </Typography>
+        //             </Grid>
+        //             <Grid container item direction="row" justify="center" alignItems="center"
+        //             // style={{ backgroundColor: "purple" }}
+        //             >
+        //                 <Grid container item xs={12} sm={6}
+        //                 // style={{ backgroundColor: "red" }}
+        //                 >
+        //                     <TextField
+        //                         id="outlined-textarea"
+        //                         label="Name"
+        //                         variant="outlined"
+        //                         style={{ width: "100%" }}
+        //                         type="text"
+        //                         name="name"
+        //                     />
+        //                 </Grid>
+        //                 <Grid container item xs={12} sm={6}
+        //                 // style={{ backgroundColor: "orange" }}
+        //                 >
+        //                     <TextField
+        //                         id="outlined-textarea"
+        //                         label="Email"
+        //                         variant="outlined"
+        //                         type="text"
+        //                         name="email"
+        //                         style={{ width: "100%" }}
+        //                     />
+        //                 </Grid>
+        //             </Grid>
+        //             <Grid container item justify="center" alignItems="center"
+        //             // style={{ backgroundColor: "yellow" }}
+        //             >
+        //                 <Grid container item xs={12}
+        //                 // style={{ backgroundColor: "green" }}
+        //                 >
+        //                     <TextField
+        //                         id="outlined-multiline-static"
+        //                         label="Message"
+        //                         multiline
+        //                         rows={5}
+        //                         variant="outlined"
+        //                         style={{ width: "100%" }}
+        //                         name="message"
+        //                     />
+        //                 </Grid>
+        //             </Grid>
+        //             <Grid >
+        //                 <Button variant="contained" color="primary" type="submit" >
+        //                     Send
+        //                 </Button>
+        //             </Grid>
+        //         </Grid>
+        //     </Container>
+        // </form>
+        <form name="contact" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+  <p class="hidden">
+    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+  </p>
+  <p>
+    <label>Email: <input type="text" name="email" /></label>
+  </p>
+  <p>
+    <label>Message: <textarea name="message"></textarea></label>
+  </p>
+  <p>
+    <button type="submit">Send</button>
+  </p>
+</form>
     );
 }
