@@ -9,7 +9,7 @@ import Img from "gatsby-image";
 
 const useStyles = makeStyles({
     media: {
-        height: 200,
+        maxHeight:200,
     },
 });
 export default function BlogCard(props) {
@@ -25,11 +25,13 @@ export default function BlogCard(props) {
                     /> */}
                     <Img
                         className={(props.cardMediaClass !== undefined) ? props.cardMediaClass : classes.media} 
-                        fluid={props.image} 
+                        fluid={props.image } 
+                        // fluid={{ ...props.image, aspectRatio: 1/1 }}
+                        imgStyle={(props.imgStyle !== undefined)? props.imgStyle:{objectFit: 'contain'} }
                     />
 
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography gutterBottom variant="h5" component="h2" align="center">
                             <b>
                                 {props.title}
                             </b>
