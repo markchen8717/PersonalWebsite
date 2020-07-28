@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -7,6 +7,11 @@ import Container from '@material-ui/core/Container';
 import Footer from '../components/footer'
 import { graphql } from 'gatsby'
 import ContactForm from '../components/ContactForm'
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -44,6 +49,32 @@ const useStyles = makeStyles((theme) => {
 
 export default function BlogPost(props) {
 
+    const options = {
+        renderNode: {
+            [BLOCKS.EMBEDDED_ASSET]: (node) => {
+                //Need to check if this is an image
+                if (node.data.target.fields.file["en-US"].contentType.includes("image"))
+                    return (<img src={`https:${node.data.target.fields.file["en-US"].url}`} style={{ width: '100%' }} />)
+            },
+            [BLOCKS.PARAGRAPH]: (node, children) => {
+                var prefix = node.content[0].marks[0]
+                if (prefix && prefix.hasOwnProperty('type') && prefix.type == "code") {
+                    return (
+                        // <pre>
+                        //     <code >
+                        //         {node.content[0].value}
+                        //     </code>
+                        // </pre>
+                        <SyntaxHighlighter language="python" style={nightOwl}>
+                            {node.content[0].value}
+                        </SyntaxHighlighter>
+                    )
+                }
+                else
+                    return <p>{children}</p>
+            }
+        }
+    }
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -66,7 +97,10 @@ export default function BlogPost(props) {
                     maxWidth="md"
                 // style={{ backgroundColor: "green" }}
                 >
-                    <div dangerouslySetInnerHTML={{ __html: props.data.contentfulBlogPost.postContent.childContentfulRichText.html }} />
+                    {/* <div dangerouslySetInnerHTML={{ __html: props.data.contentfulBlogPost.postContent.childContentfulRichText.html }} /> */}
+                    <div>
+                        {documentToReactComponents(props.data.contentfulBlogPost.postContent.json, options)}
+                    </div>
                 </Container>
             </main>
             <Container >
@@ -82,15 +116,13 @@ export default function BlogPost(props) {
         </React.Fragment>
     );
 };
-
 export const pageQuery = graphql`
 query($postTitle: String!){
     contentfulBlogPost (postTitle:{eq:$postTitle}){
         postContent{
-          childContentfulRichText{
-            html
-          }
+            json
         }
     }
 }
 `;
+

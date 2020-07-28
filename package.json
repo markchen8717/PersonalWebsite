@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@contentful/gatsby-transformer-contentful-richtext": "^13.1.0",
+    "@contentful/rich-text-react-renderer": "^14.1.1",
     "@material-ui/core": "^4.9.14",
     "@material-ui/styles": "^4.9.14",
     "dotenv": "^8.2.0",
@@ -24,7 +25,8 @@
     "gatsby-plugin-scroll-reveal": "0.0.6",
     "gatsby-source-contentful": "^2.3.5",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-syntax-highlighter": "^13.0.0"
   },
   "devDependencies": {
     "prettier": "2.0.5"
