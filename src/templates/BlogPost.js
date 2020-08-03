@@ -49,29 +49,42 @@ const useStyles = makeStyles((theme) => {
 
 export default function BlogPost(props) {
 
+
     const options = {
         renderNode: {
+            language:"",
             [BLOCKS.EMBEDDED_ASSET]: (node) => {
                 //Need to check if this is an image
-                if (node.data.target.fields.file["en-US"].contentType.includes("image"))
-                    return (<img src={`https:${node.data.target.fields.file["en-US"].url}`} style={{ width: '100%' }} />)
+                let prefix = node.data.target.fields
+                if (prefix && prefix.file["en-US"].contentType.includes("image"))
+                    return (<img src={`https:${prefix.file["en-US"].url}`} style={{ width: '100%' }} />)
             },
-            [BLOCKS.PARAGRAPH]: (node, children) => {
-                var prefix = node.content[0].marks[0]
-                if (prefix && prefix.hasOwnProperty('type') && prefix.type == "code") {
+            [BLOCKS.PARAGRAPH]: function(node, children) {
+
+                if (node.content.map((x) => x.nodeType).includes("hyperlink")) {
+                    const hyperlink_nodes = node.content.filter((x)=>x.nodeType === "hyperlink")
+                    const link_text = hyperlink_nodes[0].content[0].value
+                    if (link_text.includes("</code>"))
+                    {
+                        this.language = ""
+                        console.log("changed language to",this.language)
+                    }
+                    else (link_text.includes("<code"))
+                    {
+                        this.language = link_text.replace("<","").replace(">","").split(" ")[1]
+                        console.log("changed language to",this.language)
+                    }
+                    return
+                }
+                let prefix = node.content[0].marks[0]
+                if (prefix && prefix.hasOwnProperty('type') && prefix.type === "code") {
                     return (
-                        // <pre>
-                        //     <code >
-                        //         {node.content[0].value}
-                        //     </code>
-                        // </pre>
-                        <SyntaxHighlighter language="python" style={nightOwl}>
+                        <SyntaxHighlighter language={this.language} style={nightOwl}>
                             {node.content[0].value}
                         </SyntaxHighlighter>
                     )
                 }
-                else
-                    return <p>{children}</p>
+                return <p>{children}</p>
             }
         }
     }
