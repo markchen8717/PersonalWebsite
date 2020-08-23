@@ -83,7 +83,7 @@ export default function Blog() {
                 {/* Hero unit */}
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
-                        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                        <Typography component="h1" variant="h3" align="center" color="textPrimary" gutterBottom>
                             My Blogs
                         </Typography>
                         {/* <Typography variant="h5" align="center" color="textSecondary" paragraph>

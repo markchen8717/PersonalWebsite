@@ -52,27 +52,27 @@ export default function BlogPost(props) {
 
     const options = {
         renderNode: {
-            language:"",
+            language: "",
             [BLOCKS.EMBEDDED_ASSET]: (node) => {
                 //Need to check if this is an image
                 let prefix = node.data.target.fields
                 if (prefix && prefix.file["en-US"].contentType.includes("image"))
                     return (<img src={`https:${prefix.file["en-US"].url}`} style={{ width: '100%' }} />)
             },
-            [BLOCKS.PARAGRAPH]: function(node, children) {
+            [BLOCKS.PARAGRAPH]: function (node, children) {
 
-                if (node.content.map((x) => x.nodeType).includes("hyperlink")) {
-                    const hyperlink_nodes = node.content.filter((x)=>x.nodeType === "hyperlink")
+                const hyperlink_nodes = node.content.filter((x) => x.nodeType === "hyperlink")
+                if (hyperlink_nodes.length && hyperlink_nodes.every((x)=>x.data.uri === " "))
+                {
                     const link_text = hyperlink_nodes[0].content[0].value
-                    if (link_text.includes("</code>"))
-                    {
+                    if (link_text.includes("</code>")) {
                         this.language = ""
-                        console.log("changed language to",this.language)
+                        // console.log("changed language to", this.language)
                     }
                     else (link_text.includes("<code"))
                     {
-                        this.language = link_text.replace("<","").replace(">","").split(" ")[1]
-                        console.log("changed language to",this.language)
+                        this.language = link_text.replace("<", "").replace(">", "").split(" ")[1]
+                        // console.log("changed language to", this.language)
                     }
                     return
                 }
@@ -96,7 +96,7 @@ export default function BlogPost(props) {
                 {/* Hero unit */}
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
-                        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                        <Typography component="h1" variant="h3" align="center" color="textPrimary" gutterBottom>
                             {props.pageContext.postTitle}
                         </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>

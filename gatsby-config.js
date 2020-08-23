@@ -1,15 +1,30 @@
 const dotenv = require('dotenv')
 
-if (process.env.NODE_ENV !== 'production')
-{
+if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
 module.exports = {
   plugins: [
+    `gatsby-plugin-sharp`, `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}`,
+        name: 'images'
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Roboto']
+        }
+      }
+    },
     {
       resolve: `gatsby-plugin-scroll-reveal`,
       options: {
-          once: false, // Defines if animation needs to be launched once
+        once: false, // Defines if animation needs to be launched once
       }
     },
     {
