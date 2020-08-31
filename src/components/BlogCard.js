@@ -6,42 +6,43 @@ import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
 import Img from "gatsby-image";
+import { ThemeProvider } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    media: {
-        maxHeight:200,
-    },
-});
 export default function BlogCard(props) {
+    const useStyles = makeStyles(() => {
+        return {
+
+        };
+    });
+
     const classes = useStyles();
     return (
-        <Link to={props.slug} style={{ textDecoration: "none" }}>
-            <Card >
-                <CardActionArea>
-                    {/* <CardMedia
-                        className={(props.cardMediaClass !== undefined) ? props.cardMediaClass : classes.media}
-                        image={props.image}
-                        title={props.title}
-                    /> */}
-                    <Img
-                        className={(props.cardMediaClass !== undefined) ? props.cardMediaClass : classes.media} 
-                        fluid={props.image } 
-                        // fluid={{ ...props.image, aspectRatio: 1/1 }}
-                        imgStyle={(props.imgStyle !== undefined)? props.imgStyle:{objectFit: 'contain'} }
-                    />
+        <ThemeProvider theme={props.theme}>
+            <Link to={props.slug} style={{ textDecoration: "none" }}>
+                <CardActionArea style={{ height: '100%' }}>
+                    <Card style={{ height: '100%'}}>
 
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2" align="center">
-                            <b>
-                                {props.title}
-                            </b>
-                        </Typography>
-                        <Typography>
-                            {props.description}
-                        </Typography>
-                    </CardContent>
+                        <div style={{ marginTop: "5%", marginBottom: "5%", marginRight: "30%", marginLeft: "30%"}}>
+                            <Img
+                                fluid={props.image}
+                                objectFit='cover'
+                            />
+                        </div>
+                        <div style={{ paddingLeft: "20%", paddingRight: "20%", marginBottom: "5%" }}>
+                            <Typography gutterBottom variant="h6" align="center" style={{ lineHeight: "115%" }}>
+                                <b>
+                                    {props.title}
+                                </b>
+                            </Typography>
+                        </div>
+                        <div style={{ paddingLeft: "5%", paddingRight: "5%", marginTop: "5%", marginBottom:"5%"}}>
+                            <Typography align="center" style={{ lineHeight: "115%" }} color='textSecondary'>
+                                {props.description}
+                            </Typography>
+                        </div>
+                    </Card>
                 </CardActionArea>
-            </Card>
-        </Link>
+            </Link>
+        </ThemeProvider >
     );
 };
