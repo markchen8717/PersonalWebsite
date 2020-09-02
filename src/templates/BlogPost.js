@@ -11,7 +11,8 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
+import theme from '../styles/global';
+import { ThemeProvider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -90,7 +91,7 @@ export default function BlogPost(props) {
     }
     const classes = useStyles();
     return (
-        <React.Fragment>
+        <ThemeProvider theme={theme}>
             <CssBaseline />
             <main>
                 {/* Hero unit */}
@@ -122,11 +123,11 @@ export default function BlogPost(props) {
                         <ContactForm />
                     </Grid>
                     <Grid item >
-                        <Footer className={classes.footer} />
+                        <Footer className={classes.footer} theme={theme}/>
                     </Grid>
                 </Grid>
             </Container>
-        </React.Fragment>
+        </ThemeProvider>
     );
 };
 export const pageQuery = graphql`

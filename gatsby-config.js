@@ -35,6 +35,11 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
+    {resolve: "gatsby-plugin-anchor-links",
+      options: {
+        offset: -80
+      }
+    },
     `@contentful/gatsby-transformer-contentful-richtext`,
     `gatsby-plugin-material-ui`
   ]

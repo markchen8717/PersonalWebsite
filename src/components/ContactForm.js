@@ -5,8 +5,49 @@ import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography'
+import theme from '../styles/global'
 
-export default function ContactForm() {
+export default function ContactForm(props) {
+    const useStyles = makeStyles(() => {
+        return {
+            container: {
+                backgroundColor: theme.palette.common.black,
+                padding: "5%",
+                paddingLeft: "15%",
+                paddingRight: "15%"
+            },
+            header: {
+
+            }
+        }
+    });
+    const useStylesTextField = makeStyles((theme) => ({
+        root: {
+            // border: "1px solid #e2e2e1",
+            overflow: "hidden",
+            borderRadius: 4,
+            backgroundColor: "#fcfcfb",
+            width: "100%",
+            // transition: theme.transitions.create(["border-color", "box-shadow"]),
+            "&:hover": {
+                backgroundColor: "#fff"
+            },
+            "&$focused": {
+                backgroundColor: "#fff",
+                borderColor: theme.palette.primary.main
+            }
+        },
+        focused: {}
+
+    }));
+    function MyTextField(props) {
+        const classes = useStylesTextField();
+        return (
+            <TextField InputProps={{ classes, disableUnderline: true }} style={{ width: "100%" }} {...props} />
+        );
+    }
+    console.log(theme.palette.primary.main)
+    const classes = useStyles();
     return (
         <form
             name="contact"
@@ -22,71 +63,58 @@ export default function ContactForm() {
                     Don’t fill this out: <input name="bot-field" />
                 </label>
             </p>
-            <Container
-            // style={{ backgroundColor: "blue" }}
+            <Grid
+                spacing={4}
+                container direction="column" justify="center" alignItems="center" className={classes.container}
             >
-                <Grid
-                    spacing={1}
-                    container direction="column" justify="center" alignItems="center"
-                // style={{ backgroundColor: "green" }}
-                >
-                    <Grid item >
-                        <Typography variant="h6" align="center" gutterBottom>
-                            Contact Me
+                <Grid className={classes.header}>
+                    <Typography align='center' variant='h5' color="secondary">
+                        Let's Collab!
                         </Typography>
+                    <Typography color="primary" align='center'>
+                        Have an idea that you wish to make it come to life?
+                    </Typography>
+                </Grid>
+                <Grid container item direction="row" justify="center" alignItems="center" spacing={4}>
+                    <Grid container item xs={12} sm={6}>
+                        <MyTextField
+                            label="Name"
+                            variant="filled"
+                            id="outlined-textarea"
+                            type="text"
+                            name="name"
+                        />
                     </Grid>
-                    <Grid container item direction="row" justify="center" alignItems="center"
-                    // style={{ backgroundColor: "purple" }}
-                    >
-                        <Grid container item xs={12} sm={6}
-                        // style={{ backgroundColor: "red" }}
-                        >
-                            <TextField
-                                id="outlined-textarea"
-                                label="Name"
-                                variant="outlined"
-                                style={{ width: "100%" }}
-                                type="text"
-                                name="name"
-                            />
-                        </Grid>
-                        <Grid container item xs={12} sm={6}
-                        // style={{ backgroundColor: "orange" }}
-                        >
-                            <TextField
-                                id="outlined-textarea"
-                                label="Email"
-                                variant="outlined"
-                                type="text"
-                                name="email"
-                                style={{ width: "100%" }}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid container item justify="center" alignItems="center"
-                    // style={{ backgroundColor: "yellow" }}
-                    >
-                        <Grid container item xs={12}
-                        // style={{ backgroundColor: "green" }}
-                        >
-                            <TextField
-                                id="outlined-multiline-static"
-                                label="Message"
-                                multiline
-                                rows={5}
-                                variant="outlined"
-                                style={{ width: "100%" }}
-                                name="message"
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid >
-                        <Button variant="contained" color="primary" type="submit" >
-                            Send
-                        </Button>
+                    <Grid container item xs={12} sm={6}>
+                        <MyTextField
+                            id="outlined-textarea"
+                            label="Email"
+                            variant="filled"
+                            type="text"
+                            name="email"
+                        />
                     </Grid>
                 </Grid>
-            </Container>
+
+                <Grid container item xs={12} >
+                    <MyTextField
+                        id="outlined-multiline-static"
+                        label="Message"
+                        multiline
+                        rows={10}
+                        variant="filled"
+                        name="message"
+                    />
+                </Grid>
+
+                <Grid>
+                    <Button type="submit" style={{ border: "4px solid", borderColor: "#2CB2FF", color: "#2CB2FF", textTransform:"none"}} variant="outlined">
+                        <Typography>
+                            <b>Let's Chat!</b>
+                        </Typography>
+                    </Button>
+                </Grid>
+            </Grid>
         </form>
     );
 }

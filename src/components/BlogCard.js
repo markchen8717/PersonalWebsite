@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
 import Img from "gatsby-image";
 import { ThemeProvider } from '@material-ui/core';
+import theme from '../styles/global';
 
 export default function BlogCard(props) {
     const useStyles = makeStyles(() => {
@@ -16,8 +17,9 @@ export default function BlogCard(props) {
     });
 
     const classes = useStyles();
+    
     return (
-        <ThemeProvider theme={props.theme}>
+        <ThemeProvider theme={theme}>
             <Link to={props.slug} style={{ textDecoration: "none" }}>
                 <CardActionArea style={{ height: '100%' }}>
                     <Card style={{ height: '100%'}}>
@@ -35,7 +37,7 @@ export default function BlogCard(props) {
                                 </b>
                             </Typography>
                         </div>
-                        <div style={{ paddingLeft: "5%", paddingRight: "5%", marginTop: "5%", marginBottom:"5%"}}>
+                        <div style={{ paddingLeft: "8%", paddingRight: "8%", marginTop: "5%", marginBottom:"5%"}}>
                             <Typography align="center" style={{ lineHeight: "115%" }} color='textSecondary'>
                                 {props.description}
                             </Typography>

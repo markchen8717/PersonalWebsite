@@ -10,6 +10,8 @@ import BlogCard from '../components/BlogCard';
 import HeaderBar from '../components/HeaderBar';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Footer from "../components/footer";
+import ContactForm from '../components/ContactForm'
 
 
 
@@ -63,20 +65,25 @@ const Index = (props) => {
                 backgroundColor: theme.palette.secondary.main,
             },
             carousel: {
-                height:"100%"
+                height: "100%"
             },
             carousel_items: {
-                paddingLeft: "1%",
-                height:"100%",
+                paddingLeft: "2%",
+                height: "100%",
             },
-            carousel_container:{
-                height:"100%",
+            carousel_container: {
+                height: "100%",
+            },
+            contact:{
+                padding:"5%",
+                backgroundColor:theme.palette.common.black,
             }
 
         };
     });
     const classes = useStyles();
-    let blogs = props.data.allContentfulBlog.edges.map((edge, index) => {
+    console.log(props.data)
+    const blogs = props.data.allContentfulBlog.edges.map((edge, index) => {
         const node = edge.node
         return {
             blogTitle: node.blogTitle,
@@ -86,7 +93,17 @@ const Index = (props) => {
             key: index,
         }
     });
-    // blogs = [...blogs, ...blogs, ...blogs, ...blogs]
+    const posts = props.data.allContentfulBlogPost.edges.map((edge, index) => {
+        return {
+            blogTitle: edge.node.blogTitle,
+            postTitle: edge.node.postTitle,
+            postDescription: edge.node.postDescription.postDescription,
+            postImage: edge.node.postImage.fluid,
+            postSlug: props.path + "/blog/" + edge.node.blogTitle.replace(/\s+/g, '-').toLowerCase() + "/" + edge.node.postTitle.replace(/\s+/g, '-').toLowerCase(),
+            key: index,
+        };
+    });
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -101,13 +118,13 @@ const Index = (props) => {
                 </Typing>
                 <img src={typingGIF} alt="Typing animation" />
             </div>
-
             <Grid
                 container
                 direction="row"
                 justify="center"
                 alignItems="center"
                 className={classes.aboutMe}
+                id="about"
             >
                 <Grid item xs={12} sm={6} md={4}
                     style={{ padding: "5%" }}
@@ -127,8 +144,7 @@ const Index = (props) => {
             </Grid>
 
 
-
-            <Grid container spacing={4} justify="center" className={classes.whatIdo}>
+            <Grid container spacing={3} justify="center" className={classes.whatIdo} id="services">
 
                 <Grid item xs={12} sm={12} md={12}>
                     <Typography align='center' variant='h5'>
@@ -143,7 +159,7 @@ const Index = (props) => {
                     blogs.map((blog) => (
                         <Grid item xs={12} sm={6} md={4} key={blog.key}>
                             <BlogCard
-                                theme={theme}
+                                
                                 image={blog.blogImage}
                                 title={blog.blogTitle}
                                 description={blog.blogDescription}
@@ -156,28 +172,29 @@ const Index = (props) => {
 
 
 
-            <Grid container className={classes.featuredProjects} direction="row" justify="center" alignItems="center">
+            <Grid container className={classes.featuredProjects} direction="row" justify="center" alignItems="center" id="projects">
                 <Grid item xs={12} sm={12} md={12}>
                     <Typography variant='h5' align='center'>
                         <b>Featured Projects</b>
                     </Typography>
                 </Grid>
-                <Button color="inherit" style={{ textTransform: "none" }}>
+                <Button color="inherit" style={{ textTransform: "none", marginBottom: "1%" }}>
                     <Typography align='center'>
                         See All
                     </Typography>
                 </Button>
-                <Grid xs={12} sm={12} md={12} className={classes.carousel}>
-                    <Carousel responsive={responsive} itemClass={classes.carousel_items} partialVisbile containerClass={classes.carousel_container}>
+                <Grid item xs={12} sm={12} md={12} className={classes.carousel}>
+                    <Carousel responsive={responsive} itemClass={classes.carousel_items} containerClass={classes.carousel_container}>
                         {
-                            blogs.map((blog) => (
-                                <Grid item xs={12} sm={12} md={12} key={blog.key}>
+                            posts.map((post) => (
+                                <Grid item xs={12} sm={12} md={12} key={post.key}>
                                     <BlogCard
-                                        theme={theme}
-                                        image={blog.blogImage}
-                                        title={blog.blogTitle}
-                                        description={blog.blogDescription}
-                                        slug={blog.blogSlug}
+                                        
+                                        cardMediaClass={classes.cardMedia}
+                                        image={post.postImage}
+                                        title={post.postTitle}
+                                        description={post.postDescription}
+                                        slug={post.postSlug}
                                     />
                                 </Grid>
                             ))
@@ -185,6 +202,10 @@ const Index = (props) => {
                     </Carousel>
                 </Grid>
             </Grid >
+                <ContactForm  className={classes.contact}/>
+            <Footer />
+            <Link>
+            </Link>
         </ThemeProvider >
     );
 };
@@ -217,6 +238,22 @@ query {
                     }         
                 }
             }
+        }
+    }
+    allContentfulBlogPost(sort:{fields:[rank], order:ASC}) {
+        edges {
+          node {
+            blogTitle
+            postTitle
+            postImage{
+                fluid{
+                    ...GatsbyContentfulFluid
+                }
+            }
+            postDescription {
+              postDescription
+            }
+          }
         }
     }
 }

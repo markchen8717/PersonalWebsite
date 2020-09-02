@@ -1,10 +1,10 @@
 import React from 'react';
-import { Slide, AppBar, Button, useScrollTrigger, makeStyles } from '@material-ui/core';
-
+import { AnchorLink } from "gatsby-plugin-anchor-links";
+import { Slide, AppBar, Button, useScrollTrigger, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(() => {
     return {
-        default: {
+        container: {
             paddingTop: "10px",
             paddingBottom: "10px",
             paddingRight: "50px",
@@ -18,7 +18,20 @@ const useStyles = makeStyles(() => {
                 textTransform: 'none'
 
             },
+            '& AnchorLink': {
+                textTransform: 'none',
+                textDecoration: 'none',
+
+            },
         },
+        links: {
+            boxShadow: 'none',
+            textTransform: 'none',
+            textDecoration: 'none',
+            '& Button': {
+                color: "#262626"
+            }
+        }
     };
 });
 
@@ -40,15 +53,39 @@ const HeaderBar = (props) => {
     const classes = useStyles();
     return (
         <HideOnScroll>
-            <AppBar className={(props.style !== undefined) ? props.style : classes.default}>
+            <AppBar className={classes.container}>
                 <div>
                     <Button color="inherit">Mark</Button>
                 </div>
                 <div>
-                    <Button color="inherit">About</Button>
-                    <Button color="inherit">Services</Button>
-                    <Button color="inherit">Projects</Button>
-                    <Button style={{ border: "4px solid", borderColor: "#2CB2FF", color: "#2CB2FF" }} variant="outlined"><b>Let's Chat!</b></Button>
+                    <AnchorLink to="/#about" className={classes.links}>
+                        <Button color="inherit" >
+                            <Typography>
+                                About
+                            </Typography>
+                        </Button>
+                    </AnchorLink>
+                    <AnchorLink to="/#services" className={classes.links} >
+                        <Button color="inherit">
+                            <Typography>
+                                Services
+                            </Typography>
+                        </Button>
+                    </AnchorLink>
+                    <AnchorLink to="/#projects" className={classes.links}>
+                        <Button color="inherit">
+                            <Typography>
+                                Projects
+                            </Typography>
+                        </Button>
+                    </AnchorLink>
+                    <AnchorLink to="/#contact" className={classes.links}>
+                    <Button style={{ border: "4px solid", borderColor: "#2CB2FF", color: "#2CB2FF" }} variant="outlined">
+                        <Typography>
+                            <b>Let's Chat!</b>
+                        </Typography>
+                    </Button>
+                    </AnchorLink>
                 </div>
             </AppBar>
         </HideOnScroll>);

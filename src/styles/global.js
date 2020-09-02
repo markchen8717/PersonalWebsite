@@ -12,10 +12,13 @@ const theme = createMuiTheme({
             contrastText: "#262626"
 
         },
+        common:{
+            black:"#262626"
+        }
 
     },
     typography: {
-        fontSize: 12,
+        fontSize: 11,
         htmlFontSize:16,
         fontFamily:[
             "Roboto"

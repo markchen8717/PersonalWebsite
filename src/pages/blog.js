@@ -7,43 +7,46 @@ import Container from '@material-ui/core/Container';
 import BlogCard from '../components/BlogCard';
 import Footer from '../components/footer';
 import { useStaticQuery, graphql } from 'gatsby';
+import theme from '../styles/global';
+import {ThemeProvider} from '@material-ui/core'
+import HeaderBar from '../components/HeaderBar';
 
-
-const useStyles = makeStyles((theme) => {
-    return {
-        icon: {
-            marginRight: theme.spacing(2),
-        },
-        heroContent: {
-            backgroundColor: theme.palette.background.paper,
-            padding: theme.spacing(8, 0, 6),
-        },
-        heroButtons: {
-            marginTop: theme.spacing(4),
-        },
-        cardGrid: {
-            paddingTop: theme.spacing(8),
-            paddingBottom: theme.spacing(8),
-        },
-        card: {
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        cardMedia: {
-            height: 200,
-        },
-        cardContent: {
-            flexGrow: 1,
-        },
-        footer: {
-            backgroundColor: theme.palette.background.paper,
-            padding: theme.spacing(6),
-        },
-    };
-});
 
 export default function Blog() {
+
+    const useStyles = makeStyles(() => {
+        return {
+            icon: {
+                marginRight: theme.spacing(2),
+            },
+            heroContent: {
+                backgroundColor: theme.palette.background.paper,
+                padding: theme.spacing(8, 0, 6),
+            },
+            heroButtons: {
+                marginTop: theme.spacing(4),
+            },
+            cardGrid: {
+                paddingTop: theme.spacing(8),
+                paddingBottom: theme.spacing(8),
+            },
+            card: {
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+            },
+            cardMedia: {
+                height: 200,
+            },
+            cardContent: {
+                flexGrow: 1,
+            },
+            footer: {
+                backgroundColor: theme.palette.background.paper,
+                padding: theme.spacing(6),
+            },
+        };
+    });
     const classes = useStyles();
     const staticQuery = useStaticQuery(graphql`
     query{
@@ -77,8 +80,9 @@ export default function Blog() {
     });
 
     return (
-        <React.Fragment>
+        <ThemeProvider theme={theme}>
             <CssBaseline />
+            <HeaderBar/>
             <main>
                 {/* Hero unit */}
                 <div className={classes.heroContent}>
@@ -94,8 +98,8 @@ export default function Blog() {
                 {/* End hero unit */}
                 <Container
                     className={classes.cardGrid}
-                    // maxWidth="md" 
-                    // style={{ backgroundColor: "green" }}
+                // maxWidth="md" 
+                // style={{ backgroundColor: "green" }}
                 >
                     <Grid
                         container
@@ -123,7 +127,8 @@ export default function Blog() {
                     </Grid>
                 </Container>
             </main>
-            <Footer className={classes.footer} />
-        </React.Fragment>
+            <Footer theme={theme} />
+
+        </ThemeProvider>
     );
 };
