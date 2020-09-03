@@ -1,14 +1,13 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import BlogCard from '../components/BlogCard'
-import Footer from '../components/footer'
-import { graphql } from 'gatsby'
+import BlogCard from '../components/BlogCard';
+import Footer from '../components/Footer';
+import { graphql } from 'gatsby';
+import theme from '../styles/global';
+import {ThemeProvider,Container,makeStyles,Typography,Grid,CssBaseline} from '@material-ui/core';
+import HeaderBar from '../components/HeaderBar';
 
-const useStyles = makeStyles((theme) => {
+
+const useStyles = makeStyles(() => {
     return {
         icon: {
             marginRight: theme.spacing(2),
@@ -56,8 +55,9 @@ export default function BlogPage(props) {
     });
     const classes = useStyles();
     return (
-        <React.Fragment>
+        <ThemeProvider theme={theme}>
             <CssBaseline />
+            <HeaderBar/>
             <main>
                 {/* Hero unit */}
                 <div className={classes.heroContent}>
@@ -103,7 +103,7 @@ export default function BlogPage(props) {
                 </Container>
             </main>
             <Footer className={classes.footer} />
-        </React.Fragment>
+        </ThemeProvider>
     );
 };
 

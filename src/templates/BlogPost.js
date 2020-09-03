@@ -6,15 +6,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from '../components/Footer'
 import { graphql } from 'gatsby'
-import ContactForm from '../components/ContactForm'
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import theme from '../styles/global';
 import { ThemeProvider } from '@material-ui/core';
+import HeaderBar from '../components/HeaderBar';
 
-const useStyles = makeStyles((theme) => {
+
+const useStyles = makeStyles(() => {
     return {
         icon: {
             marginRight: theme.spacing(2),
@@ -63,8 +64,7 @@ export default function BlogPost(props) {
             [BLOCKS.PARAGRAPH]: function (node, children) {
 
                 const hyperlink_nodes = node.content.filter((x) => x.nodeType === "hyperlink")
-                if (hyperlink_nodes.length && hyperlink_nodes.every((x)=>x.data.uri === " "))
-                {
+                if (hyperlink_nodes.length && hyperlink_nodes.every((x) => x.data.uri === " ")) {
                     const link_text = hyperlink_nodes[0].content[0].value
                     if (link_text.includes("</code>")) {
                         this.language = ""
@@ -85,7 +85,9 @@ export default function BlogPost(props) {
                         </SyntaxHighlighter>
                     )
                 }
-                return <p>{children}</p>
+                return (<Typography>
+                    {children}
+                </Typography>);
             }
         }
     }
@@ -93,6 +95,7 @@ export default function BlogPost(props) {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
+            <HeaderBar />
             <main>
                 {/* Hero unit */}
                 <div className={classes.heroContent}>
@@ -117,16 +120,13 @@ export default function BlogPost(props) {
                     </div>
                 </Container>
             </main>
-            <Container >
-                <Grid container direction="column" spacing={6} >
-                    <Grid item >
-                        <ContactForm />
-                    </Grid>
-                    <Grid item >
-                        <Footer className={classes.footer} theme={theme}/>
-                    </Grid>
+
+            <Grid container direction="column" spacing={6} >
+                <Grid item >
+                    <Footer className={classes.footer} theme={theme} />
                 </Grid>
-            </Container>
+            </Grid>
+
         </ThemeProvider>
     );
 };

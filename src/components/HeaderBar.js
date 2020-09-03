@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 import { Slide, AppBar, Button, useScrollTrigger, makeStyles, Typography } from '@material-ui/core';
-
+import logo from "../images/Mark_logo.png"
 const useStyles = makeStyles(() => {
     return {
         container: {
@@ -50,12 +50,15 @@ function HideOnScroll(props) {
 }
 
 const HeaderBar = (props) => {
+    console.log(props)
     const classes = useStyles();
     return (
         <HideOnScroll>
             <AppBar className={classes.container}>
                 <div>
-                    <Button color="inherit">Mark</Button>
+                    <AnchorLink to="/" className={classes.links}>
+                        <img src={logo} style={{ width: "40px", height: "40px" }} />
+                    </AnchorLink>
                 </div>
                 <div>
                     <AnchorLink to="/#about" className={classes.links}>
@@ -80,11 +83,11 @@ const HeaderBar = (props) => {
                         </Button>
                     </AnchorLink>
                     <AnchorLink to="/#contact" className={classes.links}>
-                    <Button style={{ border: "4px solid", borderColor: "#2CB2FF", color: "#2CB2FF" }} variant="outlined">
-                        <Typography>
-                            <b>Let's Chat!</b>
-                        </Typography>
-                    </Button>
+                        <Button style={{ border: "4px solid", borderColor: "#2CB2FF", color: "#2CB2FF" }} variant="outlined">
+                            <Typography>
+                                <b>Let's Chat!</b>
+                            </Typography>
+                        </Button>
                     </AnchorLink>
                 </div>
             </AppBar>

@@ -37,7 +37,7 @@ module.exports = {
     },
     {resolve: "gatsby-plugin-anchor-links",
       options: {
-        offset: -40
+        offset: 10
       }
     },
     `@contentful/gatsby-transformer-contentful-richtext`,
