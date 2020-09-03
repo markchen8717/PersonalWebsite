@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import BlogCard from '../components/BlogCard';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 import { useStaticQuery, graphql } from 'gatsby';
 import theme from '../styles/global';
 import {ThemeProvider} from '@material-ui/core'

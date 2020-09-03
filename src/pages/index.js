@@ -1,7 +1,6 @@
-import { Link, graphql, useStaticQuery } from "gatsby";
-import React, { useState, useEffect } from 'react';
-import { Slide, AppBar, Button, useScrollTrigger, makeStyles, ThemeProvider, Grid, Container, CssBaseline } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { Link, graphql } from "gatsby";
+import React from 'react';
+import { Button, makeStyles, ThemeProvider, Grid, CssBaseline, Typography, Divider } from '@material-ui/core';
 import Typing from 'react-typing-animation';
 import theme from '../styles/global';
 import typingGIF from '../images/typing.gif'
@@ -10,7 +9,7 @@ import BlogCard from '../components/BlogCard';
 import HeaderBar from '../components/HeaderBar';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import ContactForm from '../components/ContactForm'
 
 
@@ -22,7 +21,6 @@ const Index = (props) => {
 
     const responsive = {
         superLargeDesktop: {
-            // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 3000 },
             items: 5
         },
@@ -41,7 +39,7 @@ const Index = (props) => {
     };
     const useStyles = makeStyles(() => {
         return {
-            typing: {
+            greeter: {
                 marginTop: "120px",
                 '& img': {
                     display: "block",
@@ -51,38 +49,35 @@ const Index = (props) => {
                     height: "40%"
                 }
             },
-            aboutMe: {
+            about: {
                 backgroundColor: theme.palette.secondary.main,
+                padding: "5%"
             },
-            whatIdo: {
+            services: {
                 marginTop: "5%",
-                paddingLeft: "5%",
-                paddingRight: "5%"
+                padding: "5%"
             },
-            featuredProjects: {
+            projects: {
                 padding: "5%",
                 marginTop: "5%",
                 backgroundColor: theme.palette.secondary.main,
             },
-            carousel: {
-                height: "100%"
-            },
             carousel_items: {
-                paddingLeft: "2%",
-                height: "100%",
+                padding: "2%",
             },
             carousel_container: {
-                height: "100%",
-            },
-            contact:{
-                padding:"5%",
-                backgroundColor:theme.palette.common.black,
-            }
 
+            },
+            contact: {
+                backgroundColor:  theme.palette.common.black,
+                paddingTop:"5%"
+            },
+            footer:{
+
+            }
         };
     });
     const classes = useStyles();
-    console.log(props.data)
     const blogs = props.data.allContentfulBlog.edges.map((edge, index) => {
         const node = edge.node
         return {
@@ -108,7 +103,7 @@ const Index = (props) => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <HeaderBar />
-            <div className={classes.typing}>
+            <Grid container xs={12} justify="center" alignItems="center" direction="column" className={classes.greeter} >
                 <Typing>
                     <Typography align='center' variant='h3'><b>Greetings! I am Mark, a</b></Typography>
                     <Typography align='center' variant='h3'><b>programmer</b></Typography>
@@ -117,18 +112,10 @@ const Index = (props) => {
                     <Typography align='center' color='secondary' variant='h3'><b>software developer.</b></Typography>
                 </Typing>
                 <img src={typingGIF} alt="Typing animation" />
-            </div>
-            <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                className={classes.aboutMe}
-                id="about"
-            >
-                <Grid item xs={12} sm={6} md={4}
-                    style={{ padding: "5%" }}
-                >
+            </Grid>
+
+            <Grid container direction="row" spacing={6} justify="center" alignItems="center" className={classes.about} id="about">
+                <Grid item xs={12} sm={6} md={4}>
                     <Typography align='center' variant='h5'>
                         <b>About Me</b>
                     </Typography>
@@ -136,60 +123,64 @@ const Index = (props) => {
                         I am a full-time student in the day, and a part-time software engineer in the night. As a programming enthusiast, I am always on the lookout for new ideas!
                     </Typography>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}
-                    style={{ padding: "2.5%" }}
-                >
+                <Grid item xs={12} sm={6} md={4}>
                     <Img fluid={props.data.aboutMePicture.childImageSharp.fluid} />
                 </Grid>
             </Grid>
 
-
-            <Grid container spacing={3} justify="center" className={classes.whatIdo} id="services">
-
-                <Grid item xs={12} sm={12} md={12}>
-                    <Typography align='center' variant='h5'>
-                        <b>What I do</b>
-                    </Typography>
-                    <Typography align='center' color='textSecondary'>
-                        I am a freelancer!
+            <Grid container spacing={3} justify="center" className={classes.services} id="services" direction="column">
+                <Grid item xs={12}>
+                    <Grid container justify="center" direction="column">
+                        <Typography align='center' variant='h5'>
+                            <b>What I do</b>
                         </Typography>
-
+                        <Typography align='center' color='textSecondary'>
+                            I am a freelancer!
+                        </Typography>
+                    </Grid>
                 </Grid>
-                {
-                    blogs.map((blog) => (
-                        <Grid item xs={12} sm={6} md={4} key={blog.key}>
-                            <BlogCard
-                                
-                                image={blog.blogImage}
-                                title={blog.blogTitle}
-                                description={blog.blogDescription}
-                                slug={blog.blogSlug}
-                            />
-                        </Grid>
-                    ))
-                }
+                <Grid item xs={12}>
+                    <Grid container spacing={3} justify="center" direction="row">
+                        {
+                            blogs.map((blog) => (
+                                <Grid item xs={12} sm={6} md={4} key={blog.key}>
+                                    <BlogCard
+
+                                        image={blog.blogImage}
+                                        title={blog.blogTitle}
+                                        description={blog.blogDescription}
+                                        slug={blog.blogSlug}
+                                    />
+                                </Grid>
+                            ))
+                        }
+                    </Grid>
+                </Grid>
             </Grid>
-
-
-
-            <Grid container className={classes.featuredProjects} direction="row" justify="center" alignItems="center" id="projects">
-                <Grid item xs={12} sm={12} md={12}>
+            <Grid container className={classes.projects} direction="column" justify="center" id="projects">             
+                <Grid item xs={12}>
                     <Typography variant='h5' align='center'>
                         <b>Featured Projects</b>
                     </Typography>
                 </Grid>
-                <Button color="inherit" style={{ textTransform: "none", marginBottom: "1%" }}>
-                    <Typography align='center'>
-                        See All
-                    </Typography>
-                </Button>
-                <Grid item xs={12} sm={12} md={12} className={classes.carousel}>
+                <Grid item xs={12}>
+                    <Grid container >
+                        <Link to="/blog" style={{ textDecoration: 'none' }}>
+                            <Button color="inherit" style={{ textTransform: 'none' }}>
+                                <Typography color='textSecondary'>
+                                    See All
+                                </Typography>
+                            </Button>
+                        </Link>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12} >
                     <Carousel responsive={responsive} itemClass={classes.carousel_items} containerClass={classes.carousel_container}>
                         {
                             posts.map((post) => (
                                 <Grid item xs={12} sm={12} md={12} key={post.key}>
                                     <BlogCard
-                                        
+
                                         cardMediaClass={classes.cardMedia}
                                         image={post.postImage}
                                         title={post.postTitle}
@@ -202,10 +193,14 @@ const Index = (props) => {
                     </Carousel>
                 </Grid>
             </Grid >
-                <ContactForm  className={classes.contact}/>
-            <Footer />
-            <Link>
-            </Link>
+            <Grid container className={classes.contact} direction="column" justify="center" id="contact">
+                <ContactForm />
+            </Grid>
+            <Grid container direction="column" justify="center" className={classes.footer}>
+                <Grid item xs={12}>
+                    <Footer />
+                </Grid>
+            </Grid>
         </ThemeProvider >
     );
 };
