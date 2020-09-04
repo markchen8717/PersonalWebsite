@@ -10,7 +10,7 @@ module.exports = {
     description:
       "A full-time student in the day, and a part-time software developer in the night.",
     url: "", // No trailing slash allowed!
-    image: "/Mark_logo.png", // Path to your image you placed in the 'static' folder
+    image: "/src/static/Mark_logo.jpg", // Path to your image you placed in the 'static' folder
     twitterUsername: "",
   },
   plugins: [
