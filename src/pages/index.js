@@ -120,7 +120,7 @@ const Index = (props) => {
                         <b>About Me</b>
                     </Typography>
                     <Typography color='textSecondary'>
-                        I am a full-time student in the day, and a part-time software engineer in the night. As a programming enthusiast, I am always on the lookout for new ideas!
+                        I am a full-time student in the day, and a part-time software developer in the night. As a programming enthusiast, I am always on the lookout for new ideas!
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -180,7 +180,6 @@ const Index = (props) => {
                             posts.map((post) => (
                                 <Grid item xs={12} sm={12} md={12} key={post.key}>
                                     <BlogCard
-
                                         cardMediaClass={classes.cardMedia}
                                         image={post.postImage}
                                         title={post.postTitle}
