@@ -4,7 +4,17 @@ if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
 module.exports = {
+  siteMetadata: {
+    title: "Mark Chen | Software Developer",
+    titleTemplate: "",
+    description:
+      "A full-time student in the day, and a part-time software developer in the night.",
+    url: "", // No trailing slash allowed!
+    image: "/src/images/Mark_logo.png", // Path to your image you placed in the 'static' folder
+    twitterUsername: "",
+  },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`, `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -35,7 +45,8 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    {resolve: "gatsby-plugin-anchor-links",
+    {
+      resolve: "gatsby-plugin-anchor-links",
       options: {
         offset: 10
       }

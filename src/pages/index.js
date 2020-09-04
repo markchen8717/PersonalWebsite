@@ -11,6 +11,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Footer from "../components/Footer";
 import ContactForm from '../components/ContactForm'
+import SEO from '../components/SEO'
 
 
 
@@ -69,10 +70,10 @@ const Index = (props) => {
 
             },
             contact: {
-                backgroundColor:  theme.palette.common.black,
-                paddingTop:"5%"
+                backgroundColor: theme.palette.common.black,
+                paddingTop: "5%"
             },
-            footer:{
+            footer: {
 
             }
         };
@@ -103,6 +104,7 @@ const Index = (props) => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <HeaderBar />
+            <SEO/>
             <Grid container xs={12} justify="center" alignItems="center" direction="column" className={classes.greeter} >
                 <Typing>
                     <Typography align='center' variant='h3'><b>Greetings! I am Mark, a</b></Typography>
@@ -157,7 +159,7 @@ const Index = (props) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid container className={classes.projects} direction="column" justify="center" id="projects">             
+            <Grid container className={classes.projects} direction="column" justify="center" id="projects">
                 <Grid item xs={12}>
                     <Typography variant='h5' align='center'>
                         <b>Featured Projects</b>
