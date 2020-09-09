@@ -117,12 +117,12 @@ const Index = (props) => {
             </Grid>
 
             <Grid container direction="row" spacing={6} justify="center" alignItems="center" className={classes.about} id="about">
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid item xs={12} sm={6} md={4} style={{paddingRight:"5%",paddingLeft:"5%"}}>
                     <Typography align='center' variant='h5'>
                         <b>About Me</b>
                     </Typography>
                     <Typography color='textSecondary'>
-                        I am a full-time student in the day, and a part-time software developer in the night. 
+                        I am a full-time Computer Science student at the University of Toronto by day and a part-time software developer by night. 
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -134,10 +134,10 @@ const Index = (props) => {
                 <Grid item xs={12}>
                     <Grid container justify="center" direction="column">
                         <Typography align='center' variant='h5'>
-                            <b>What I do</b>
+                            <b>What I Do</b>
                         </Typography>
                         <Typography align='center' color='textSecondary'>
-                            I am a freelancer!
+                            
                         </Typography>
                     </Grid>
                 </Grid>
