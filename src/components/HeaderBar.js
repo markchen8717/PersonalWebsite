@@ -50,7 +50,7 @@ function HideOnScroll(props) {
 }
 
 const HeaderBar = (props) => {
-    console.log(props)
+
     const classes = useStyles();
     return (
         <HideOnScroll>

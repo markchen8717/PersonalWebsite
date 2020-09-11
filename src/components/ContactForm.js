@@ -46,7 +46,7 @@ export default function ContactForm(props) {
             <TextField InputProps={{ classes, disableUnderline: true }} style={{ width: "100%" }} {...props} />
         );
     }
-    console.log(theme.palette.primary.main)
+
     const classes = useStyles();
     return (
         <Grid item xs={12} className={classes.root}>
