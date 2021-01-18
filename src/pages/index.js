@@ -122,7 +122,7 @@ const Index = (props) => {
                         <b>About Me</b>
                     </Typography>
                     <Typography color='textSecondary'>
-                        I am a full-time Computer Science student at the University of Toronto by day and a part-time software developer by night. 
+                        I am a full-time Computer Science student at the University of Toronto in day and a part-time software developer by night. 
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
