@@ -10,6 +10,11 @@
   Learn more about my personal projects and myself at <a href="https://markchen.tech" target="_blank">markchen.tech</a> 😃
 </p>
 
+## Featuring
+- ### Multilingual Web Syntax Highlighter
+  Implemented a multilingual web syntax highlighter to parse and display my code from my content manage system, making it easier to read for site visitors.
+  <img src="/src/images/syntax_highlighter.png">
+  
 ## Software Stack
 - ### React.js
     <img src="https://www.freecodecamp.org/news/content/images/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png" width=105 height=60/>
