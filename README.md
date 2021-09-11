@@ -23,6 +23,6 @@
 - ### Designed with Material UI
     <img src="https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png" width=129 height=60/>
 - ### Content Managed with Contenful
-    <img src="https://www.contentful.com/assets/images/graphics/open_graph.png" width=114 height=60/>
+    <img src="https://www.gartner.com/imagesrv/peer-insights/vendors/logos/contentful.png" width=114 height=60/>
 - ### Served on Netlify
     <img src="https://www.netlify.com/img/global/meta-image.jpg" width=112 height=60/>
